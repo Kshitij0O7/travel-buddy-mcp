@@ -1,7 +1,10 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
-const TRAVEL_BUDDY_BASE = "https://travel-buddy-api-khaki.vercel.app";
+const TRAVEL_BUDDY_BASE = process.env.TRAVEL_BUDDY_BASE;
+if (!TRAVEL_BUDDY_BASE) {
+    throw new Error("TRAVEL_BUDDY_BASE is not set");
+}
 const USER_AGENT = "travel-planner-mcp/1.0";
 const server = new McpServer({
     name: "travel-planner",
